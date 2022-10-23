@@ -56,5 +56,8 @@ class MainActivity : AppCompatActivity() {
                 startService(MyJobWithIntentService.newIntent(this, page++))
             }
         }
+        binding.buttonJobIntentService.setOnClickListener {
+            MyJobIntentService.enqueue(this, page++)
+        }
     }
 }

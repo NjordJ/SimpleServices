@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.iruda.servicesexample">
 
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -23,7 +25,8 @@
             </intent-filter>
         </activity>
         <!--Services-->
-        <service android:name=".FirstService"/>
+        <service android:name=".MySimpleService" />
+        <service android:name=".MyForegroundService" />
     </application>
 
 </manifest>

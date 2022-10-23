@@ -13,7 +13,7 @@ import androidx.core.app.NotificationCompat
 class MyIntentService : IntentService(NAME) {
 
     override fun onCreate() {
-        super.onCreate()oiii
+        super.onCreate()
         log("onCreate")
         // if true -> same as START_REDELIVER_INTENT
         // if false -> same as START_NOT_STICKY

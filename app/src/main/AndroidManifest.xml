@@ -30,8 +30,10 @@
         <service android:name=".MySimpleService" />
         <service android:name=".MyForegroundService" />
         <service android:name=".MyIntentService" />
-        <service android:name=".MyJobService"
-            android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service
+            android:name=".MyJobService"
+            android:permission="android.permission.BIND_JOB_SERVICE" />
+        <service android:name=".MyJobWithIntentService" />
     </application>
 
 </manifest>

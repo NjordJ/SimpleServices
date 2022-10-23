@@ -52,6 +52,8 @@ class MainActivity : AppCompatActivity() {
                 // schedule - start last launched service
                 // enqueue - starts queue of services
                 jobScheduler.enqueue(jobInfo, JobWorkItem(intent))
+            } else {
+                startService(MyJobWithIntentService.newIntent(this, page++))
             }
         }
     }

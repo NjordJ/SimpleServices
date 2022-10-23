@@ -2,6 +2,8 @@ package com.iruda.servicesexample
 
 import android.app.job.JobParameters
 import android.app.job.JobService
+import android.content.Intent
+import android.os.Build
 import android.util.Log
 import kotlinx.coroutines.*
 
@@ -20,12 +22,21 @@ class MyJobService : JobService() {
     override fun onStartJob(params: JobParameters?): Boolean {
         log("onStartCommand")
         coroutineScope.launch {
-            for (i in 0 until 100) {
-                delay(1000)
-                log("Timer $i")
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                var workItem = params?.dequeueWork()
+                while (workItem != null) {
+                    val page = workItem.intent.getIntExtra(PAGE_KEY, 0)
+                    for (i in 0 until 5) {
+                        delay(1000)
+                        log("Timer $i $page")
+                    }
+                    params?.completeWork(workItem)
+                    workItem = params?.dequeueWork()
+
+                }
+                // Second param means should it be restarted or not
+                jobFinished(params, false)
             }
-            // Second param means should it be restarted or not
-            jobFinished(params, true)
         }
         return true
     }
@@ -50,5 +61,12 @@ class MyJobService : JobService() {
     companion object {
 
         const val JOB_ID = 11
+        private const val PAGE_KEY = "page"
+
+        fun newIntent(page: Int): Intent {
+            return Intent().apply {
+                putExtra(PAGE_KEY, page)
+            }
+        }
     }
 }
